@@ -1,0 +1,19 @@
+name = "video-upload-system"
+main = "src/index.ts"
+compatibility_date = "2023-08-21"
+
+# Cấu hình biến môi trường
+[vars]
+# Thêm các biến môi trường cần thiết ở đây (không bao gồm các thông tin nhạy cảm)
+DATABASE_URL = ""
+
+# Cấu hình R2 bucket
+[[r2_buckets]]
+binding = 'VIDEO_BUCKET'
+bucket_name = "${CLOUDFLARE_R2_BUCKET}"
+
+# Cấu hình secrets (thêm bằng lệnh wrangler)
+# wrangler secret put CLOUDFLARE_ACCOUNT_ID
+# wrangler secret put CLOUDFLARE_ACCESS_KEY_ID
+# wrangler secret put CLOUDFLARE_SECRET_ACCESS_KEY
+# wrangler secret put DATABASE_URL

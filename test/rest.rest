@@ -1,0 +1,78 @@
+@baseUrl = http://localhost:3000/api
+@apiKey = CXANvddaaXGjAEwivH9X23Zbk8Re1yyvLBVWN8dHQVHCWlRl1m5IYRXkBLKMByWK
+
+### Get list of uploaded files
+GET {{baseUrl}}/uploads
+X-API-Key: {{apiKey}}
+
+### Upload file directly
+# @name uploadFile
+POST {{baseUrl}}/upload/file
+X-API-Key: {{apiKey}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary
+
+------WebKitFormBoundary
+Content-Disposition: form-data; name="file"; filename="css.mp4"
+Content-Type: video/mp4
+
+< C:\Users\duong\Downloads\css.mp4
+------WebKitFormBoundary--
+
+### Test with a real video file (update the path to a real video file on your system)
+POST {{baseUrl}}/upload/file
+X-API-Key: {{apiKey}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary
+
+------WebKitFormBoundary
+Content-Disposition: form-data; name="file"; filename="css.mp4"
+Content-Type: video/mp4
+
+< C:\Users\duong\Downloads\css.mp4
+------WebKitFormBoundary--
+
+### Test invalid file type
+POST {{baseUrl}}/upload/file
+X-API-Key: {{apiKey}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary
+
+------WebKitFormBoundary
+Content-Disposition: form-data; name="file"; filename="test.exe"
+Content-Type: application/x-msdownload
+
+< ./test-files/test.exe
+------WebKitFormBoundary--
+
+### Test unauthorized access (invalid API key)
+GET {{baseUrl}}/uploads
+X-API-Key: invalid-key
+
+### NEW VIDEO API ENDPOINTS ###
+
+### Get list of videos
+GET {{baseUrl}}/videos
+X-API-Key: {{apiKey}}
+
+### Get video by ID (replace with a valid ID after uploading)
+GET {{baseUrl}}/videos/video_id_here
+X-API-Key: {{apiKey}}
+
+### Upload video with automatic thumbnail extraction
+# @name uploadVideo
+POST {{baseUrl}}/videos
+X-API-Key: {{apiKey}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary
+
+------WebKitFormBoundary
+Content-Disposition: form-data; name="title"
+
+Test Video Title
+------WebKitFormBoundary
+Content-Disposition: form-data; name="description"
+
+This is a test video description
+------WebKitFormBoundary
+Content-Disposition: form-data; name="video"; filename="test-video.mp4"
+Content-Type: video/mp4
+
+< C:\Users\duong\Downloads\css.mp4
+------WebKitFormBoundary--
